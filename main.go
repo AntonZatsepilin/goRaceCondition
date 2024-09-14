@@ -8,7 +8,7 @@ import (
 
 type counter struct {
 	count int
-	mu    *sync.Mutex
+	mu    *sync.RWMutex
 }
 
 func (c *counter) inc() {
@@ -18,15 +18,15 @@ func (c *counter) inc() {
 }
 
 func (c *counter) value() int {
-	c.mu.Lock()
-	defer c.mu.Unlock()
+	c.mu.RLock()
+	defer c.mu.RUnlock()
 
 	return c.count
 }
 
 func main() {
 	c := counter{
-		mu: new(sync.Mutex),
+		mu: new(sync.RWMutex),
 	}
 
 	for i := 0; i < 1000; i++ {
