@@ -4,6 +4,7 @@ go run -race main.go
 
 This example clearly shows the race condition
 
+```go
 package main
 
 import (
@@ -21,3 +22,4 @@ func main() {
 	time.Sleep(time.Second * 2)
 	fmt.Println(counter)
 }
+```
